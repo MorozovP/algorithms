@@ -1,4 +1,4 @@
-# Спринт 11 B. Ловкость рук
+# 67932189
 
 from typing import Tuple
 

@@ -1,4 +1,4 @@
-# Спринт 11 A. Ближайший ноль
+# 67931953
 
 from typing import List
 
