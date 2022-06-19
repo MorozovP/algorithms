@@ -1,33 +1,37 @@
 import array
 
-base = int(input())
-m = int(input())
-text = [ord(x) for x in input()]
-n = int(input())
-
-
-hash_index = array.array('I',)
-
-
-def polinom(base, m, sequence, hash_index, start):
+def polinom(base, modulo, sequence):
+    hash_index = [0]
+    base_powers = array.array('I', [1])
     if sequence:
-        hash_index.append(sequence[start - 1] % m)
-        for j in range(start, len(sequence)):
-            hash_index.append((hash_index[-1] * base + sequence[j]) % m)
-    return 0
+        for j in range(len(sequence)):
+            hash_index.append((hash_index[j] * base + sequence[j]) % modulo)
+            base_powers.append((base_powers[j] * base) % modulo)
+    return hash_index, base_powers
 
 
-def build_hash_index_2(text, ind):
-    for i in range(1, len(text)+1):
-        polinom(base, m, sequence=text, hash_index=ind, start=i)
-    return
+def get_hash(start, end, hash_index, base_power, modulo):
+    if start == 0:
+        return hash_index[end]
+    return (hash_index[end] - hash_index[start] * base_power) % modulo
 
 
-build_hash_index_2(text, hash_index)
+def read_input():
+    base = int(input())
+    modulo = int(input())
+    sequence = [ord(x) for x in input()]
+    n = int(input())
+    return base, modulo, sequence, n
 
-for _ in range(n):
-    l, r = [int(x) for x in input().split()]
-    x = len(text)
-    n = x * (l - 1) - ((l - 1) * l) // 2
-    number = n + r - 1
-    print(hash_index[number])
+
+def main():
+    base, modulo, sequence, n = read_input()
+    hash_index, base_powers = polinom(base, modulo, sequence)
+    for _ in range(n):
+        l, r = [int(x) for x in input().split()]
+        print(get_hash(l-1, r, hash_index, base_powers[r-l+1], modulo))
+
+
+if __name__ == '__main__':
+    main()
+
