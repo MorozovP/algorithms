@@ -20,6 +20,14 @@ def quicksort(sequence):
 
 
 def houses_counter(prices, amount):
+    """
+    Подсчет количества домов, которые можно купить на имеющуюся сумму.
+    :param prices: List[int]
+    :param amount: int
+    :return: int
+    >>> houses_counter([999, 999, 999], 1000)
+    1
+    """
     if prices:
         prices = quicksort(prices)
     tmp = 0
