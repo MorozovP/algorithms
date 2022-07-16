@@ -1,6 +1,17 @@
 # 12 H. Скобочная последовательность
 
 def correct_parentheses(s):
+    """
+    :param s: str
+    :return: bool
+    >>> correct_parentheses('((])')
+    False
+    >>> correct_parentheses('()()()')
+    True
+    >>> correct_parentheses('{[[])')
+    False
+
+    """
 
     for i in range(len(s) // 2):
         s = s.replace('()', '')
